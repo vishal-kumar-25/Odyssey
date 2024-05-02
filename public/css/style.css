@@ -1,0 +1,44 @@
+body {
+    background-color : pink;
+}
+
+.navbar {
+    height: 5rem;
+}
+
+.fa-compass {
+    color: red;
+    font-size: 2rem;
+}
+
+.nav-link{
+    color : #222222 !important;
+}
+
+.f-info-links a{
+text-decoration: none;
+color: black;
+}
+
+.f-info-links a:hover {
+    text-decoration: underline;
+}
+
+.f-info-socials{
+    width: 100%;
+    font-size: 1.5rem;
+    margin: 2rem;
+}
+
+.f-info {
+    height: 8rem;
+    display: flex;
+    background-color: rgb(247, 220, 220);
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: space-evenly;
+}
+
+
+
+
