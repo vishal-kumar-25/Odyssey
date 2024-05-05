@@ -1,5 +1,11 @@
 body {
     background-color : rgb(233, 155, 168);
+    flex-direction: column;
+    height: 100vh;
+}
+
+.container{
+    flex: 1;
 }
 
 .navbar {
@@ -8,7 +14,7 @@ body {
 }
 
 .name{
-    color : blue;
+    color : red;
     font-family :fantasy;
 }
 
@@ -52,6 +58,46 @@ color: black;
     font-size: 1.5rem;
     margin: 2rem;
 }
+
+.add-btn{
+    background-color: red !important;
+    border: none !important;
+}
+
+.card{
+    border: none !important;
+    margin: 1.5rem;
+    
+}
+
+.card-img-top {
+    border-radius: 1rem !important;
+    width: 100% ! important;
+    object-fit: cover !important;
+}
+
+.card-body {
+    padding: 0 !important;
+}
+
+.card-text p {
+    font-weight: 400;
+    
+}
+
+/* card effect */
+.card-img-overlay{
+    opacity: 0;
+}
+
+.card-img-overlay:hover {
+    opacity: 0.2;
+    background-color:white ;
+}
+
+
+
+
 
 
 
