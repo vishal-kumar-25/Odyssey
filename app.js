@@ -5,7 +5,10 @@ const Listing = require("./models/listing.js");
 const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
-
+const Review = require("./models/review.js");
+const wrapAsync =require("./utils/wrapAsync.js");
+const ExpressError = require("./utils/ExpressError.js");
+const {  listingSchema } = require("./schema.js");
 
 
 const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
@@ -90,6 +93,23 @@ app.delete("/listings/:id", async (req, res) => {
     console.log(deletedListing);
     res.redirect("/listings");
 });
+
+//Rviews
+//post route
+app.post("/listing/:id/reviews", async (req, res) => {
+    let listing = await Listing.findById(req.params.id);
+  let newReview =  new Review(req.body.review);
+
+  listing.reviews.push(newReview);
+
+  await newReview.save();
+  await listing.save();
+
+
+console.log("new review saved");
+res.send("new review saved");
+});
+
 
 // let sampleListing = new Listing({
 //     title: "My New Villa",
