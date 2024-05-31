@@ -64,7 +64,7 @@ color: black;
     border: none !important;
 }
 
-.card{
+.listing-card{
     border: none !important;
     margin: 1.5rem;
     
@@ -96,10 +96,15 @@ color: black;
 }
 
 
+/* ediyt page */
+
+.edit-btn{
+      background-color: red !important;
+    border: none !important;
+}
 
 
-
-
-
-
-
+/* show page */
+.show-img{
+    height: 30vh;
+}

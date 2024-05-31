@@ -1,5 +1,17 @@
 <% layout('/layouts/boilerplate') -%>
-<body>
+<div class="row">
+    <div class="col-8 offset-2">
+<h3>Listing Details :</h3>
+</div>
+<div>
+<div class="card col-6 offset-2">
+    <img src="<%= listing.image %>>" class="card-img-top show-img" alt="listing_image">
+    <%= listing.title %>
+  <div class="card-body">
+    <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+  </div>
+</div>
+
     <ul>
         <li><%= listing.title %></li>    
         <li><%= listing.description %></li>
@@ -37,12 +49,22 @@
          </div>
          <button class="btn btn-outline-dark">Submit</button>
         </form>
-
-
-
-
-
-
+  
+         <hr/>
         
+    <p><b>All Reviews</b></p>
+
+        <% for(review of listing.reviews) { %>
+            <div class="card">
+       <div class="card-body">
+        <h5>class="card-title">Abhishek Singh</h5> 
+        <p class="card-text">review.comment</p>
+        <p class="card-text">review.rating</p>
+       </div>
+            </div>
+           <% } %>
+       </div>
     </div>
-</body>
+</div>
+
+
