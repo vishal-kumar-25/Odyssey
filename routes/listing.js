@@ -1,21 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const wrapAsync = require('../utils/wrapAsync.js');
-const ExpressError = require("../utils/ExpressError.js");
-const { listingSchema } = require("../schema.js");
 const Listing = require("../models/listing");
-const {isLoggedIn} = require("../middleware.js");
+const {isLoggedIn, isOwner, validateListing } = require("../middleware.js");
 
-//Middleware to validate listings
-const validateListing = (req, res, next) => {
-    let { error } = listingSchema.validate(req.body);
-    if(error) {   
-        let errMsg = error.details.map((el) => el.message).join(",");
-        throw new ExpressError(400, errMsg);
-    }else {
-        next();
-    }
-};
 
 //Index Route
 router.get("/", wrapAsync(async (req, res) => {
@@ -39,7 +27,11 @@ router.get("/:id",
   
     let {id} = req.params;
     const listing = await Listing.findById(id)
-    .populate("reviews")
+    .populate({path : "reviews",
+        populate: {
+            path: "author",
+        },
+    })
     .populate("owner");
     if(!listing) {
         req.flash("error", "Listing you requested  for does not exist!");
@@ -78,19 +70,11 @@ router.get("/:id/edit", isLoggedIn, async (req, res) => {
  router.put(
     "/:id",
      isLoggedIn,
+     isOwner,
      validateListing, 
      wrapAsync(async (req, res) => {
      let { id } = req.params;
      let listing = await Listing.findById(id); 
-     if (!listing) {
-        req.flash("error", "Listing not found!");
-        return res.redirect("/listings");
-    }
-     if(!listing.owner.equals(currUser._id)) {
-     req.flash("error", "You don't have permission to edit");
-     res.redirect(`/listings/${id}`);
-     }
-
      await Listing.findByIdAndUpdate(id, {...req.body.listing});
      req.flash("success", "Listing Updated!");
      res.redirect(`/listings/${id}`); 
