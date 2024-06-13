@@ -108,3 +108,10 @@ color: black;
 .show-img{
     height: 30vh;
 }
+
+
+/* map */
+#map {
+    height: 400px;
+    width:100vh;
+}

@@ -1,3 +1,9 @@
+
+
+if(process.env.NODE_ENV != "production"){
+    require("dotenv").config();
+console.log(process.env.SECRET);
+}
 const express = require("express");  
 const app = express();
 const mongoose = require("mongoose");
@@ -19,11 +25,14 @@ const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
 
 const session = require("express-session");
+const MongoStore = require('connect-mongo');
 const flash = require("connect-flash");
 
+//const MONGO_URL = ""mongodb://127.0.0.1:27017/wanderlust";
 
 
-const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
+const dbURL = process.env.ATLASDB_URL;
+
 
 main()
 .then(() => {
@@ -44,8 +53,22 @@ app.use(express.urlencoded({extended: true}));
 app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "/public")));
 
+const store = MongoStore.create({
+    mongoURL: dbURL,
+    crypto: {
+        secret: process.env.SECRET,
+    },
+        touchAfter: 24 * 3600,
+    
+});
+
+store.on("error", () => {
+    console.log("ERROR in MONGO SESSION STORE", err);
+});
+
 const sessionOptions = {
-    secret: "mysupersecretcode",
+    store,
+    secret: "process.env.SECRET",
     resave: false,
     saveUninitialized: true,
     cookie: {
@@ -92,9 +115,11 @@ app.use("/", userRouter);
 
 
 
-app.get("/", (req, res) => {
-    res.send("Hi, I am root");
-});
+// app.get("/", (req, res) => {
+//     res.send("Hi, I am root");
+// });
+
+
 
 // app.all("*", (req, res, next) => {
 //     console.log("Hit 404 route");
