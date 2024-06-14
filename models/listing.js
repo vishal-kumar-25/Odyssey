@@ -32,14 +32,14 @@ const listingSchema = new Schema({
       type: {
         type: String, // Don't do `{ location: { type: String } }`
         enum: ['Point'], // 'location.type' must be 'Point'
-        required: true
+        required: true,
       },
   
       coordinates: {
         type: [Number],
-        requires: true
-      }
-    }
+        requires: true,
+      },
+    },
   });
 
 listingSchema.post("findOneAndDelete", async (listing) => {
@@ -50,6 +50,11 @@ listingSchema.post("findOneAndDelete", async (listing) => {
 
 const Listing = mongoose.model("Listing", listingSchema); 
 module.exports = Listing;
+
+
+
+
+
 
 
 
