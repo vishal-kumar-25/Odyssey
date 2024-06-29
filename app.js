@@ -5,16 +5,12 @@ if(process.env.NODE_ENV != "production"){
 const express = require("express");  
 const app = express();
 const mongoose = require("mongoose");
-// const Listing = require("./models/listing");
 const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
-//const wrapAsync = require('./utils/wrapAsync.js');
 const ExpressError = require("./utils/ExpressError.js");
 const session = require("express-session");
 const MongoStore = require('connect-mongo');
-//const { listingSchema, reviewSchema } = require("./schema.js");
-//const Review = require("./models/review.js");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
@@ -41,21 +37,6 @@ main()
 async function main() {
     await mongoose.connect(dbUrl);
 }
-
-
-// const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
-
-// main()
-// .then(() => {
-//     console.log("connected to DB");
-// })
-// .catch((err) => {
-//     console.log(err);
-// });
-
-// async function main() {
-//     await mongoose.connect(MONGO_URL);
-// }
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
