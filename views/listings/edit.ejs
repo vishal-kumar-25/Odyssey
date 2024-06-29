@@ -3,19 +3,38 @@
     <div class="col-8 offset-2">
 
     <h3>Edit your Listing</h3>
-    <form method="POST" action="/listings/<%= listing._id %>?_method=PUT" novalidate class="needs-validation"
-        enctype="multipart/form-data">
+    <form
+     method="POST" 
+     action="/listings/<%= listing._id %>?_method=PUT"
+        novalidate
+        class="needs-validation"
+        enctype="multipart/form-data"
+        >
     
         <div class="mb-3">
         <label for="title" class="form-label">Title</label>
-        <input name="listing[title]"
+        <input
+         name="listing[title]"
          value="<%= listing.title %>"
          type="text" 
          class="form-control"
          required
          />
+         <div class="valid-feedback">Title looks good!</div>
        </div>
 
+       <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea 
+        name="listing[description]"
+         class="form-control"
+         required>
+         <%= listing.description %>
+        </textarea> 
+        <div class="invalid-feedback">Please enter a short description</div>
+        </div>
+   
+ 
        <div class="mb-3">
         Original Listing Image<br/>
         <img src="<%= originalImageUrl %>" class="img-fluid" alt="Listing Image" />
@@ -24,7 +43,11 @@
 
     <div class="mb-3">
         <label for="image" class="form-label">Upload New Image</label>
-        <input name="listing[image]"  type="file" class="form-control"
+        <input
+         name="listing[image]"  
+         type="file"
+         class="form-control"
+         
        />
     </div>
         
@@ -37,8 +60,9 @@
          type="number" 
          class="form-control"
          required />
+         <div class="invalid-feedback">Price should be valid</div>
        </div>
-    </div>
+   
 
 
         <div class="mb-3">
@@ -52,9 +76,11 @@
          required 
          />
        </div>
+    </div>
        
         <div class="mb-3">
             <label for="location" class="form-label">Location</label>
+       
 
         <input
          name="listing[location]"
@@ -63,10 +89,12 @@
          class="form-control"
          required 
         />
-       </div>
+      
+    </div>
          <br/><br/>
          
          <button class="btn btn-dark edit-btn mt-3">Save</button>
+        </div>
     </form>
 </div>
 </div>
