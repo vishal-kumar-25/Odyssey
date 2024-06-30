@@ -5,12 +5,18 @@ const geocodingClient = mbxGeocoding({ accessToken: mapToken });
 
 
 module.exports.index = async (req, res) => {
+    try{                                                 
     const allListings = await Listing.find({});
+    console.log("All Listings:", allListings);
     res.render("listings/index.ejs", { allListings });
+}catch (err){
+    req.flash("error", "Cannot find listings");
+    res.redirect("/");
+  }
 };
-
 module.exports.renderNewForm =  (req, res) => {
     if(!req.isAuthenticated()) {
+        console.error("Error finding listings:", err);
         req.flash("error", "you must be logged in to create Listing!");
         return  res.redirect("/login");
     }
