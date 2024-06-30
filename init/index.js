@@ -1,46 +1,24 @@
-
-
 const mongoose = require("mongoose");
 const initData = require("./data.js");
 const Listing = require("../models/listing.js");
 
-// Changed: Use MongoDB Atlas URL from environment variable
-const dbUrl = process.env.ATLASDB_URL;
+const MONGO_URL = process.env.ATLASDB_URL;
 
-// Changed: Single Database Connection and Initialization
+main()
+  .then(() => {
+    console.log("Connected to DB");
+    return initDB(); // Initialize the DB after connecting
+  })
+  .catch((err) => {
+    console.error("Error connecting to DB:", err);
+  });
+
 async function main() {
-    try {
-        await mongoose.connect(dbUrl, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true
-        });
-        console.log("Connected to DB");
-    } catch (err) {
-        console.error("Database connection error: ", err);
-        return; // Exit if connection fails
-    }
-
-    await initDB();
-    mongoose.disconnect();
+  await mongoose.connect(MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true });
 }
 
 const initDB = async () => {
-    try {
-        await Listing.deleteMany({});
-        initData.data = initData.data.map((obj) => ({ ...obj, owner: "66657747d75daba8fdf6b8f8" }));
-        await Listing.insertMany(initData.data);
-        console.log("Data was initialized");
-    } catch (err) {
-        console.error("Data initialization error: ", err);
-    }
+  await Listing.deleteMany({});
+  await Listing.insertMany(initData.data);
+  console.log("Data was initialized");
 };
-
-main();
-
-
-
-
-
-
-
-
