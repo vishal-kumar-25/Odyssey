@@ -79,7 +79,7 @@ const sessionOptions = {
 };
 
 app.get("/", (req, res) => {
-    res.render("index"); 
+    res.render("listings/index"); 
 });
 
 app.use(bodyParser.urlencoded({ extended: true }));
