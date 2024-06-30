@@ -102,7 +102,9 @@ app.use("/listings/:id/reviews", reviewRouter);
 app.use("/", userRouter);
 
 
-
+app.get("/", (req, res) => {
+    res.render("index"); 
+});
 
 // app.all("*", (req, res, next) => {
 //     console.log("Hit 404 route");
