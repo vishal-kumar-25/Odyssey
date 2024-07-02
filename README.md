@@ -1,2 +1,2 @@
 # Odyssey
- Travel Destination website
+ Travel Destinations website
