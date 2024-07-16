@@ -1,2 +1,2 @@
 # Odyssey
- Travel E-commerce website
+ Travel Destination Website
