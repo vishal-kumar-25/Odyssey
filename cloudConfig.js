@@ -10,7 +10,7 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
     cloudinary: cloudinary,
     params: {
-      folder: 'odyssey_DEV',
+      folder: 'odyssey_NEW',
       allowedFormat: ["png", "jpg", "jpeg"],
     },
   });
