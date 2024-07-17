@@ -78,10 +78,10 @@ const sessionOptions = {
     },
 };
 
-app.get("/", (req, res) => {
-    res.redirect("listings/index"); 
-});
 
+app.get("/", (req, res) => {
+    res.redirect("/listings");
+});
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
