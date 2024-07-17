@@ -79,8 +79,9 @@ const sessionOptions = {
 };
 
 app.get("/", (req, res) => {
-    res.render("listings/index"); 
+    res.redirect("listings/index"); 
 });
+
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
